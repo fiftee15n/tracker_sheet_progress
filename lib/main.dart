@@ -10,29 +10,54 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Hello World App',
+      title: 'Button Press App',
       theme: ThemeData(
         useMaterial3: true,
       ),
-      home: const HelloWorldScreen(),
+      home: const ButtonPressScreen(),
     );
   }
 }
 
-class HelloWorldScreen extends StatelessWidget {
-  const HelloWorldScreen({super.key});
+class ButtonPressScreen extends StatefulWidget {
+  const ButtonPressScreen({super.key});
+
+  @override
+  State<ButtonPressScreen> createState() => _ButtonPressScreenState();
+}
+
+class _ButtonPressScreenState extends State<ButtonPressScreen> {
+  String displayText = "Press the button";
+
+  void _changeText() {
+    setState(() {
+      displayText = "Button Pressed";
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Button Press App'),
+      ),
       body: Center(
-        child: Text(
-          'Hello World',
-          style: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-            color: const Color.fromARGB(255, 253, 4, 253), // Custom color
-          ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              displayText,
+              style: const TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: _changeText,
+              child: const Text('Press'),
+            ),
+          ],
         ),
       ),
     );
