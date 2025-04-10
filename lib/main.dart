@@ -10,64 +10,54 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Text Styling App',
+      title: 'Two Screens App',
       theme: ThemeData(
         useMaterial3: true,
       ),
-      home: const TextStylingScreen(),
+      home: const FirstScreen(),
     );
   }
 }
 
-class TextStylingScreen extends StatelessWidget {
-  const TextStylingScreen({super.key});
+class FirstScreen extends StatelessWidget {
+  const FirstScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Text Styling App'),
+        title: const Text('First Screen'),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Large Bold Text',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Colors.blue,
-              ),
-            ),
-            const SizedBox(height: 10),
-            Text(
-              'Medium Italic Text',
-              style: TextStyle(
-                fontSize: 18,
-                fontStyle: FontStyle.italic,
-                color: Colors.green,
-              ),
-            ),
-            const SizedBox(height: 10),
-            Text(
-              'Small Underlined Text',
-              style: TextStyle(
-                fontSize: 14,
-                decoration: TextDecoration.underline,
-                color: Colors.red,
-              ),
-            ),
-            const SizedBox(height: 10),
-            Text(
-              'Custom Font Weight',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-                color: Colors.purple,
-              ),
-            ),
-          ],
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const SecondScreen()),
+            );
+          },
+          child: const Text('Go to Second Screen'),
+        ),
+      ),
+    );
+  }
+}
+
+class SecondScreen extends StatelessWidget {
+  const SecondScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Second Screen'),
+      ),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: const Text('Back to First Screen'),
         ),
       ),
     );
