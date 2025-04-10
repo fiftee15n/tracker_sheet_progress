@@ -10,55 +10,33 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Button Press App',
+      title: 'List View App',
       theme: ThemeData(
         useMaterial3: true,
       ),
-      home: const ButtonPressScreen(),
+      home: const ListViewScreen(),
     );
   }
 }
 
-class ButtonPressScreen extends StatefulWidget {
-  const ButtonPressScreen({super.key});
-
-  @override
-  State<ButtonPressScreen> createState() => _ButtonPressScreenState();
-}
-
-class _ButtonPressScreenState extends State<ButtonPressScreen> {
-  String displayText = "Press the button";
-
-  void _changeText() {
-    setState(() {
-      displayText = "Button Pressed";
-    });
-  }
+class ListViewScreen extends StatelessWidget {
+  const ListViewScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final List<int> numbers = List.generate(10, (index) => index + 1);
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Button Press App'),
+        title: const Text('List View App'),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              displayText,
-              style: const TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: _changeText,
-              child: const Text('Press'),
-            ),
-          ],
-        ),
+      body: ListView.builder(
+        itemCount: numbers.length,
+        itemBuilder: (context, index) {
+          return ListTile(
+            title: Text('Item ${numbers[index]}'),
+          );
+        },
       ),
     );
   }
